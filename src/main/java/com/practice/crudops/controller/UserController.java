@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("app/v1")
@@ -30,6 +31,12 @@ public class UserController {
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> usersList = userService.getAllUsers();
         return new ResponseEntity<>(usersList, HttpStatus.OK);
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<User> getUser(int userId) {
+        User user = userService.get(userId);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PutMapping("/update")
